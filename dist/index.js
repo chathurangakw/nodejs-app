@@ -38514,6 +38514,9 @@ const debugObj = Object.assign((namespace) => {
     disable,
     log: log_js_1.log,
 });
+function escapeRegExp(string) {
+    return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // Escape special characters
+}
 function enable(namespaces) {
     enabledString = namespaces;
     enabledNamespaces = [];
@@ -38522,10 +38525,10 @@ function enable(namespaces) {
     const namespaceList = namespaces.split(",").map((ns) => ns.trim().replace(wildcard, ".*?"));
     for (const ns of namespaceList) {
         if (ns.startsWith("-")) {
-            skippedNamespaces.push(new RegExp(`^${ns.substr(1)}$`));
+            skippedNamespaces.push(new RegExp(`^${escapeRegExp(ns.substr(1))}$`));
         }
         else {
-            enabledNamespaces.push(new RegExp(`^${ns}$`));
+            enabledNamespaces.push(new RegExp(`^${escapeRegExp(ns)}$`));
         }
     }
     for (const instance of debuggers) {
