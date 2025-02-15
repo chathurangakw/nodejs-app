@@ -38498,7 +38498,14 @@ async function parseXML(str, opts = {}) {
 // Licensed under the MIT license.
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const log_js_1 = __nccwpck_require__(6757);
-const debugEnvVariable = (typeof process !== "undefined" && process.env && process.env.DEBUG) || undefined;
+function sanitizeEnvVariable(envValue: string): string {
+    return envValue.replace(/[^a-zA-Z0-9,.*:-]/g, ''); // Allow only safe characters
+}
+  
+const debugEnvVariable =
+(typeof process !== "undefined" && process.env && process.env.DEBUG)
+    ? sanitizeEnvVariable(process.env.DEBUG)
+    : undefined;
 let enabledString;
 let enabledNamespaces = [];
 let skippedNamespaces = [];
