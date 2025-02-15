@@ -38504,7 +38504,7 @@ let enabledNamespaces = [];
 let skippedNamespaces = [];
 const debuggers = [];
 if (debugEnvVariable) {
-    enable(debugEnvVariable);
+    enable(escapeRegExp(debugEnvVariable));
 }
 const debugObj = Object.assign((namespace) => {
     return createDebugger(namespace);
@@ -38525,10 +38525,10 @@ function enable(namespaces) {
     const namespaceList = namespaces.split(",").map((ns) => ns.trim().replace(wildcard, ".*?"));
     for (const ns of namespaceList) {
         if (ns.startsWith("-")) {
-            skippedNamespaces.push(new RegExp(`^${escapeRegExp(ns.substr(1))}$`));
+            skippedNamespaces.push(new RegExp(`^${ns.substr(1)}$`));
         }
         else {
-            enabledNamespaces.push(new RegExp(`^${escapeRegExp(ns)}$`));
+            enabledNamespaces.push(new RegExp(`^${ns}$`));
         }
     }
     for (const instance of debuggers) {
