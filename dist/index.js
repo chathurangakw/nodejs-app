@@ -38504,7 +38504,7 @@ let enabledNamespaces = [];
 let skippedNamespaces = [];
 const debuggers = [];
 if (debugEnvVariable) {
-    enable(escapeRegExp(debugEnvVariable));
+    enable(debugEnvVariable);
 }
 const debugObj = Object.assign((namespace) => {
     return createDebugger(namespace);
@@ -38514,9 +38514,6 @@ const debugObj = Object.assign((namespace) => {
     disable,
     log: log_js_1.log,
 });
-function escapeRegExp(string) {
-    return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // Escape special characters
-}
 function enable(namespaces) {
     enabledString = namespaces;
     enabledNamespaces = [];
@@ -38766,7 +38763,6 @@ function log(message, ...args) {
 /************************************************************************/
 var __webpack_exports__ = {};
 const {BlobServiceClient} = __nccwpck_require__(1012);
-//
 module.exports = __webpack_exports__;
 /******/ })()
 ;
