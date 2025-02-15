@@ -19,7 +19,7 @@ on:
   
 jobs:
   analyze:
-    name: Analyze (${{ matrix.language }})
+    name: Analyze
     runs-on: 'ubuntu-latest'
     permissions:
       # required for all workflows
@@ -32,11 +32,6 @@ jobs:
       actions: read
       contents: read
 
-    strategy:
-      fail-fast: false
-      matrix:
-        include: 'javascript-typescript'
-
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
@@ -45,8 +40,7 @@ jobs:
     - name: Initialize CodeQL
       uses: github/codeql-action/init@v3
       with:
-        languages: ${{ matrix.language }}
-        build-mode: ${{ matrix.build-mode }}
+        languages: 'javascript-typescript'
 
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v3
