@@ -1,0 +1,12 @@
+name: "App test"
+
+on:
+  push:
+jobs:
+  app-test:
+    runs-on: 'ubuntu-latest'
+    steps:
+    - name: Check cgroup
+      run: |
+        cat /proc/self/cgroup
+
