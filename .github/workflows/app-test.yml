@@ -11,6 +11,7 @@ jobs:
         cat /proc/self/cgroup
     - name: Check memory
       run: |
+        ls -la /proc/
         ls -la /sys/fs/cgroup/memory/
         ls -la /sys/fs/cgroup/memory/system.slice/
         cat /sys/fs/cgroup/memory/system.slice/runner-provisioner.service/memory.max_usage_in_bytes
