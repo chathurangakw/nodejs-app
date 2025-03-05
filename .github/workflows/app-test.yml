@@ -1,0 +1,23 @@
+name: "App test"
+
+on:
+  push:
+jobs:
+  app-test:
+    runs-on: 'ubuntu-latest'
+    steps:
+    - name: Check cgroup
+      run: |
+        cat /proc/self/cgroup
+    - name: Check memory
+      run: |
+        ls -la /proc/
+        ls -la /sys/fs/cgroup/memory/
+        ls -la /sys/fs/cgroup/memory/system.slice/
+        cat /sys/fs/cgroup/memory/system.slice/runner-provisioner.service/memory.max_usage_in_bytes
+    - name: Check memory 2
+      if: always()
+      run: |
+        cat /proc/meminfo
+
+
